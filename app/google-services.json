@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "94671763693",
+    "firebase_url": "https://fixtech-ae5a0.firebaseio.com",
+    "project_id": "fixtech-ae5a0",
+    "storage_bucket": "fixtech-ae5a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94671763693:android:952d6747186d1b3bdeb4e4",
+        "android_client_info": {
+          "package_name": "com.example.fixtech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94671763693-ffsj0rscvtmk3s0m4og444pt7mil4398.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fixtech",
+            "certificate_hash": "a588d6b1663fb068c2d8153b2d0b9d5fc7ab32d0"
+          }
+        },
+        {
+          "client_id": "94671763693-7u2kj5778u4sh16ptn9se5dv59oh0gi7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPfGZqMRmqe2VaIFP3MwoIfxkaWAjuMK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94671763693-7u2kj5778u4sh16ptn9se5dv59oh0gi7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

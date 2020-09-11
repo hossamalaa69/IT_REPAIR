@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple2"
+    tools:context=".ItemActivity">
+
+    <ScrollView
+        android:id="@+id/main_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/image_layout"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="200dp"
+                android:layout_height="200dp">
+                <ImageView
+                    android:id="@+id/item_img"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:scaleType="fitXY"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_image_placeholder"
+                    android:background="@color/transparent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_upload_img_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end|bottom"
+                    android:backgroundTint="@color/White"
+                    android:src="@drawable/ic_add_purple"
+                    android:onClick="selectImage"
+                    app:borderWidth="0dp"/>
+
+                <ProgressBar
+                    android:id="@+id/upload_image_progress_item"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_layout"
+                android:layout_margin="10dp"
+                android:paddingBottom="100dp"
+                android:layout_centerHorizontal="true">
+
+                <RelativeLayout
+                    android:id="@+id/relative_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                <TextView
+                    android:id="@+id/cust_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Customer Name:"
+                    android:layout_marginEnd="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/gray"/>
+                <EditText
+                    android:id="@+id/cust_name_edit"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/cust_name_txt"
+                    android:textColorHint="@color/dark_gray"
+                    android:hint="(i.e. Hossam Alaa)"
+                    android:inputType="textPersonName"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@color/White"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_number"
+                    android:layout_below="@id/relative_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+                    <ImageView
+                        android:id="@+id/cust_phone_img"
+                        android:layout_centerVertical="true"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/ic_phone_white"/>
+                    <EditText
+                        android:id="@+id/cust_phone_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/cust_phone_img"
+                        android:inputType="phone"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/dark_gray"
+                        android:hint="(i.e. +447450235062)"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_email"
+                    android:layout_below="@id/relative_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp">
+
+                    <ImageView
+                        android:id="@+id/cust_email_img"
+                        android:layout_centerVertical="true"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/ic_email_white"/>
+
+                    <EditText
+                        android:id="@+id/cust_email_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/cust_email_img"
+                        android:inputType="textWebEmailAddress"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/dark_gray"
+                        android:hint="(i.e. hossamalaa69.ha@gmail.com)"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_device_name"
+                    android:layout_below="@id/relative_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                    <TextView
+                        android:id="@+id/device_name_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Device Name:"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/gray"/>
+                    <EditText
+                        android:id="@+id/device_name_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/device_name_txt"
+                        android:textColorHint="@color/dark_gray"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:hint="(i.e. Dell Inspiron 7577)"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_device_id"
+                    android:layout_below="@id/relative_device_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                    <TextView
+                        android:id="@+id/device_id_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Device ID:"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"/>
+                    <EditText
+                        android:id="@+id/device_id_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:textColorHint="@color/dark_gray"
+                        android:hint="(i.e. MF3HG2D6GDKHSF1)"
+                        android:layout_toEndOf="@id/device_id_txt"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_device_issue"
+                    android:layout_below="@id/relative_device_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                    <TextView
+                        android:id="@+id/device_issue_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Device Issue:"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"/>
+                    <EditText
+                        android:id="@+id/device_issue_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/dark_gray"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:hint="(i.e. Damaged Screen)"
+                        android:layout_toEndOf="@id/device_issue_txt"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relative_device_password"
+                    android:layout_below="@id/relative_device_issue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                    <TextView
+                        android:id="@+id/device_password_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Device Password:"
+                        android:layout_marginEnd="5dp"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"/>
+                    <EditText
+                        android:id="@+id/device_password_edit"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/device_password_txt"
+                        android:textColorHint="@color/dark_gray"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:hint="(i.e. XXXXXXXXX)"
+                        android:textSize="15sp"
+                        android:textColor="@color/White"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relative_device_status"
+                    android:layout_below="@id/relative_device_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:id="@+id/device_status_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Issue Status:"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"/>
+                    <RadioGroup
+                        android:id="@+id/myRadioGroup"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/device_status_txt"
+                        android:background="@color/transparent"
+                        android:checkedButton="@id/radio_not_fixed"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/White"
+                            android:id="@+id/radio_fixed"
+                            android:text="Fixed" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/White"
+                            android:id="@+id/radio_not_fixed"
+                            android:text="Not Fixed" />
+                    </RadioGroup>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relative_ispaid"
+                    android:layout_below="@id/relative_device_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <TextView
+                        android:id="@+id/device_paid_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Payment:"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray"/>
+                    <RadioGroup
+                        android:id="@+id/paid_radio_group"
+                        android:layout_marginStart="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/device_paid_txt"
+                        android:background="@color/transparent"
+                        android:checkedButton="@id/radio_paid"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/White"
+                            android:id="@+id/radio_paid"
+                            android:text="Paid" />
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/White"
+                            android:id="@+id/radio_not_paid"
+                            android:text="Not Paid" />
+                    </RadioGroup>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_book_date"
+                    android:layout_below="@id/relative_ispaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
+                    <TextView
+                        android:id="@+id/book_date_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Booking Date:"
+                        android:textSize="15sp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/gray"/>
+
+                    <TextView
+                        android:id="@+id/book_date_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/book_date_hint"
+                        android:textColor="@color/White"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relative_delivery_date"
+                    android:layout_below="@id/relative_book_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp">
+                    <ImageView
+                        android:id="@+id/img_pick_date"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_date_white"
+                        android:onClick="openDateDelivery" />
+                    <TextView
+                        android:id="@+id/delivery_date_hint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/img_pick_date"
+                        android:layout_centerVertical="true"
+                        android:text="Delivery Date:"
+                        android:textSize="15sp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/gray"/>
+                    <TextView
+                        android:id="@+id/delivery_date_txt"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@id/delivery_date_hint"
+                        android:textSize="12sp"
+                        android:textColor="@color/White"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_save_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
+        android:backgroundTint="@color/White"
+        android:src="@drawable/ic_done_purple"
+        app:borderWidth="0dp"
+        android:onClick="saveItem"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>
