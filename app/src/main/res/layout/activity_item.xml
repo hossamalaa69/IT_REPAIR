@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/cust_name_txt"
                     android:textColorHint="@color/dark_gray"
-                    android:hint="(i.e. Hossam Alaa)"
+                    android:hint="(Enter Customer Name)"
                     android:inputType="textPersonName"
                     android:textStyle="bold"
                     android:textSize="15sp"
@@ -114,7 +114,7 @@
                         android:inputType="phone"
                         android:textStyle="bold"
                         android:textColorHint="@color/dark_gray"
-                        android:hint="(i.e. +447450235062)"
+                        android:hint="(Enter Phone)"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
@@ -143,7 +143,7 @@
                         android:inputType="textWebEmailAddress"
                         android:textStyle="bold"
                         android:textColorHint="@color/dark_gray"
-                        android:hint="(i.e. hossamalaa69.ha@gmail.com)"
+                        android:hint="(Enter Email)"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
@@ -173,7 +173,7 @@
                         android:textColorHint="@color/dark_gray"
                         android:maxLines="1"
                         android:textStyle="bold"
-                        android:hint="(i.e. Dell Inspiron 7577)"
+                        android:hint="(Enter Device Name)"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
@@ -202,7 +202,7 @@
                         android:textStyle="bold"
                         android:maxLines="1"
                         android:textColorHint="@color/dark_gray"
-                        android:hint="(i.e. MF3HG2D6GDKHSF1)"
+                        android:hint="(Enter Device ID)"
                         android:layout_toEndOf="@id/device_id_txt"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
@@ -232,7 +232,7 @@
                         android:textColorHint="@color/dark_gray"
                         android:textStyle="bold"
                         android:maxLines="1"
-                        android:hint="(i.e. Damaged Screen)"
+                        android:hint="(Enter Device Issue)"
                         android:layout_toEndOf="@id/device_issue_txt"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
@@ -262,7 +262,7 @@
                         android:textColorHint="@color/dark_gray"
                         android:textStyle="bold"
                         android:maxLines="1"
-                        android:hint="(i.e. XXXXXXXXX)"
+                        android:hint="(Enter Device Password)"
                         android:textSize="15sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>

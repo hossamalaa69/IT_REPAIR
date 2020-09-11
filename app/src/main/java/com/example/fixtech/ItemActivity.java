@@ -9,6 +9,7 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -42,6 +43,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.BuildConfig;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -441,7 +443,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     private void checkPrinting(Item item) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ItemActivity.this);
         //Setting message manually and performing action on button click
-        builder.setMessage("Do You Want To Create PDF & Share via Bluetooth ?")
+        builder.setMessage("Do You Want To Create PDF file ?")
                 .setCancelable(true)
                 .setPositiveButton("Yes", (dialog, id) -> {
                     printPDF(item);
@@ -462,13 +464,12 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void printPDF(Item item) {
-        //Toast.makeText(this, "Printing PDF", Toast.LENGTH_SHORT).show();
 
         PdfDocument myPdfDocument = new PdfDocument();
         PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(62,85,1).create();
         PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
 
-        int x = 2, y = 7;
+        int x = 4, y = 7;
         Paint myPaint = new Paint();
 
         //Admin Name
@@ -477,37 +478,40 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
 
         myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         myPaint.setTextAlign(Paint.Align.CENTER);
-        myPaint.setColor(Color.CYAN);
+        myPaint.setColor(Color.RED);
         String myString = "IT  REPAIR";
         myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
         y+=5;
 
         //Address Part
-        myPaint.setTextSize(4.5f);
+        myPaint.setTextSize(5f);
         myPaint.setTextScaleX(0.5f);
         myPaint.setColor(Color.GRAY);
         myPaint.setTextAlign(Paint.Align.CENTER);
-        myString = "61 HIGH ST, PAISLEY, PA1 2AS";
+        myString = "61 HIGH STREET, PAISLEY, PA1 2AS";
         myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
         y+=5;
 
         //Phone part
         myString = "01413282049";
         myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=10;
+        y+=7;
 
-        int spacing = 6;
+
+        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
+
+        int spacing = 7;
         //Device Name
         myPaint.setTextSize(6.0f);
         myPaint.setTextAlign(Paint.Align.LEFT);
         myPaint.setColor(Color.BLACK);
         myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        myString = "Device: " + item.getDevice_name();
+        myString = "Device:  " + item.getDevice_name();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         //Payment
-        myString = "Payment: ";
+        myString = item.getIssue_status() + ",  ";
         if(item.isPaid())
             myString += "Paid";
         else
@@ -517,43 +521,39 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
 
 
         //Customer Name
-        myString = "Customer: " + item.getCustomer_name();
+        myString = "Customer:  " + item.getCustomer_name();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         //Customer Phone
-        myString = "Phone: " + item.getCustomer_phone();
+        myString = "Phone:  " + item.getCustomer_phone();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         //Device ID
-        myString = "ID: " + item.getDevice_ID();
+        myString = "ID:  " + item.getDevice_ID();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         //Device Issue
-        myString = "Issue: " + item.getDevice_issue();
+        myString = "Issue:  " + item.getDevice_issue();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
-        //Status
-        myString = "Status: " + item.getIssue_status();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
 
         //Device Password
-        myString = "Password: " + item.getDevice_password();
+        myString = "Password:  " + item.getDevice_password();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
         //Device booking date
-        myString = "Booking: " + sdf.format(new Date(item.getBook_date())).toString();
+        myString = "Booking:  " + sdf.format(new Date(item.getBook_date())).toString();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
         y+=spacing;
 
         //Device booking date
-        myString = "Delivery: " + sdf.format(new Date(item.getDelivery_date())).toString();
+        myString = "Delivery:  " + sdf.format(new Date(item.getDelivery_date())).toString();
         myPage.getCanvas().drawText(myString, x, y, myPaint);
 
         myPdfDocument.finishPage(myPage);
@@ -563,7 +563,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
         try {
             myPdfDocument.writeTo(new FileOutputStream(myFile));
             Toast.makeText(ItemActivity.this, "PDF is created successfully", Toast.LENGTH_SHORT).show();
-            shareBluetooth(myFile);
+            openPDF(myFile);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -574,7 +574,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
 
     private void shareBluetooth(File myFile) {
         // generate URI, I defined authority as the application ID in the Manifest, the last param is file I want to open
-        Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID, myFile);
+        Uri uri = FileProvider.getUriForFile(ItemActivity.this, "com.example.fixtech", myFile);
 
         try {
             Intent sendIntent = new Intent();
@@ -592,5 +592,22 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
         }
 
     }
+
+    private void openPDF(File file){
+
+        Uri pdf = FileProvider.getUriForFile(ItemActivity.this, "com.example.fixtech", file);
+
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pdfIntent.setDataAndType(pdf, "application/pdf");
+
+        try {
+            startActivity(pdfIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(ItemActivity.this, "Error opening file", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }

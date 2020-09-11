@@ -177,13 +177,13 @@
                         android:layout_below="@id/phone_part"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <ImageView
                             android:id="@+id/payment_phd"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_money_purple"
-                            />
+                            android:src="@drawable/ic_euro" />
                         <TextView
                             android:id="@+id/payment_txt"
                             android:layout_centerVertical="true"
