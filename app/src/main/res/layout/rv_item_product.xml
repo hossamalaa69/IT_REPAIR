@@ -178,23 +178,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <ImageView
+                        <TextView
                             android:id="@+id/payment_phd"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Price:"
+                            android:textSize="15sp"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_euro" />
+                            />
+                        <TextView
+                            android:id="@+id/price_txt"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/payment_phd"
+                            android:text="10£"
+                            android:textColor="@color/dark"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:layout_marginStart="5dp"/>
                         <TextView
                             android:id="@+id/payment_txt"
                             android:layout_centerVertical="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toEndOf="@id/payment_phd"
+                            android:layout_toEndOf="@id/price_txt"
                             android:text="Paid"
                             android:textColor="@color/dark"
                             android:textStyle="bold"
                             android:textSize="15sp"
-                            android:layout_marginStart="20dp"/>
+                            android:layout_marginStart="10dp"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -333,10 +346,10 @@
                     </RelativeLayout>
                     <ImageView
                         android:id="@+id/share_img"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_below="@id/deliver_part"
-                        android:src="@drawable/ic_share"
+                        android:src="@drawable/ic_open_pdf"
                         android:layout_marginEnd="10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="5dp"

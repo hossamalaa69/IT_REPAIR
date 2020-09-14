@@ -100,6 +100,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
 
         //Payment
         myString = item.getIssue_status() + ",  ";
+        myString += item.getPrice() + "£  ";
         if(item.isPaid())
             myString += "Paid";
         else
@@ -222,6 +223,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
         holder.device_password_txt2.setText(item.getDevice_password());
         holder.booking_txt.setText(simpleDateFormat.format(new Date(item.getBook_date())).toString());
         holder.deliver_txt.setText(simpleDateFormat.format(new Date(item.getDelivery_date())).toString());
+        holder.price_txt.setText("" + item.getPrice() + "£ ,");
         if(item.getIssue_status().equals("Fixed"))
             holder.status_txt.setText("✓");
         else
@@ -283,7 +285,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
         ImageView item_image, drop_button, callIcon, mailIcon, share_img;
         TextView item_name, status_txt, customer_name_txt, user_email, user_phone
                 , payment_txt, device_id_txt2, device_issue_txt2, device_password_txt2
-                ,booking_txt, deliver_txt;
+                ,booking_txt, deliver_txt, price_txt;
 
         ConstraintLayout expandableLayout;
         RelativeLayout mainView;
@@ -308,7 +310,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
             device_password_txt2 = (TextView) itemView.findViewById(R.id.device_password_txt2);
             booking_txt = (TextView) itemView.findViewById(R.id.booking_txt);
             deliver_txt = (TextView) itemView.findViewById(R.id.deliver_txt);
-
+            price_txt = (TextView) itemView.findViewById(R.id.price_txt);
 
             expandableLayout = itemView.findViewById(R.id.expandableLayout);
             mainView = (RelativeLayout) itemView.findViewById(R.id.main_view);

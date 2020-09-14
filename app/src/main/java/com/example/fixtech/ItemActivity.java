@@ -73,6 +73,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     private EditText device_id_edit;
     private EditText device_issue_edit;
     private EditText device_password_edit;
+    private EditText device_price_edit;
     private RadioGroup radioGroup;
     private RadioButton fixed, not_fixed;
     private RadioGroup paid_radio_group;
@@ -125,6 +126,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
             device_password_edit.setText(updated_item.getDevice_password());
             book_date_txt.setText(sdf.format(new Date(updated_item.getBook_date())).toString());
             delivery_date_txt.setText(sdf.format(new Date(updated_item.getDelivery_date())).toString());
+            device_price_edit.setText("" + updated_item.getPrice());
             if(status.equals("Fixed"))
                 radioGroup.check(R.id.radio_fixed);
             else
@@ -155,6 +157,8 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
         book_date_txt = findViewById(R.id.book_date_txt);
         delivery_date_txt = findViewById(R.id.delivery_date_txt);
         progressBar = findViewById(R.id.upload_image_progress_item);
+        device_price_edit = findViewById(R.id.device_price_edit);
+
 
         book_date_txt.setText(new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss")
                 .format(new Date()));
@@ -235,7 +239,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     public void saveItem(View view) {
 
         //case new item
-        if(currentUri != null && !cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty()
+        if(currentUri != null && !cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty() && !device_price_edit.getText().toString().isEmpty()
                 && !cust_email_edit.getText().toString().isEmpty() && !device_name_edit.getText().toString().isEmpty()
                 && !device_id_edit.getText().toString().isEmpty() && !device_issue_edit.getText().toString().isEmpty()
                 && !device_password_edit.getText().toString().isEmpty() && !delivery_date_txt.getText().toString().isEmpty() && updated_item == null){
@@ -262,12 +266,12 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
             boolean isPaid = isPaidd.equals("Paid");
             Item item = new Item("000" ,cust_name_edit.getText().toString(), cust_phone_edit.getText().toString(), cust_email_edit.getText().toString()
                     ,device_name_edit.getText().toString(), device_id_edit.getText().toString(), device_issue_edit.getText().toString()
-                    ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), currentUri.toString(), isPaid);
+                    ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), currentUri.toString(), isPaid, Float.parseFloat(device_price_edit.getText().toString()));
             insertIntoDb(item);
         }
 
         //update item
-        else if(updated_item != null && !cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty()
+        else if(updated_item != null && !cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty() && !device_price_edit.getText().toString().isEmpty()
                 && !cust_email_edit.getText().toString().isEmpty() && !device_name_edit.getText().toString().isEmpty()
                 && !device_id_edit.getText().toString().isEmpty() && !device_issue_edit.getText().toString().isEmpty()
                 && !device_password_edit.getText().toString().isEmpty() && !delivery_date_txt.getText().toString().isEmpty()){
@@ -296,7 +300,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
                 boolean isPaid = isPaidd.equals("Paid");
                 Item item = new Item( updated_item.getID(), cust_name_edit.getText().toString(), cust_phone_edit.getText().toString(), cust_email_edit.getText().toString()
                         ,device_name_edit.getText().toString(), device_id_edit.getText().toString(), device_issue_edit.getText().toString()
-                        ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), updated_item.getImage_url(), isPaid);
+                        ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), updated_item.getImage_url(), isPaid, Float.parseFloat(device_price_edit.getText().toString()));
                 updateWithoutImage(item);
             }
             //updated with new image
@@ -319,7 +323,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
                 boolean isPaid = isPaidd.equals("Paid");
                 Item item = new Item( updated_item.getID(), cust_name_edit.getText().toString(), cust_phone_edit.getText().toString(), cust_email_edit.getText().toString()
                         ,device_name_edit.getText().toString(), device_id_edit.getText().toString(), device_issue_edit.getText().toString()
-                        ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), currentUri.toString(), isPaid);
+                        ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), currentUri.toString(), isPaid, Float.parseFloat(device_price_edit.getText().toString()));
                 updateWithImage(item);
             }
 
@@ -512,6 +516,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
 
         //Payment
         myString = item.getIssue_status() + ",  ";
+        myString += item.getPrice() + "£  ";
         if(item.isPaid())
             myString += "Paid";
         else

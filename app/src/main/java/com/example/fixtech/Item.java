@@ -18,6 +18,7 @@ public class Item implements Serializable {
     private long delivery_date;
     private String image_url;
     private boolean isPaid;
+    private float price = 0;
 
     private boolean isExpanded;
 
@@ -27,7 +28,7 @@ public class Item implements Serializable {
 
     public Item(String ID, String customer_name, String customer_phone, String customer_email
             , String device_name, String device_ID, String device_issue, String device_password
-            , String issue_status, long book_date, long delivery_date, String image_url, boolean isPaid) {
+            , String issue_status, long book_date, long delivery_date, String image_url, boolean isPaid, float price) {
         this.ID = ID;
         this.customer_name = customer_name;
         this.customer_phone = customer_phone;
@@ -41,6 +42,7 @@ public class Item implements Serializable {
         this.delivery_date = delivery_date;
         this.image_url = image_url;
         this.isPaid = isPaid;
+        this.price =price;
 
         isExpanded = false;
     }
@@ -147,6 +149,14 @@ public class Item implements Serializable {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Exclude

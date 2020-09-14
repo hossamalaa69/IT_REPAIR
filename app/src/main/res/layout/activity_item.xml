@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple2"
+    android:background="#312e75"
     tools:context=".ItemActivity">
 
     <ScrollView
@@ -293,12 +293,14 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="12sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_fixed"
                             android:text="Fixed" />
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="12sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_not_fixed"
                             android:text="Not Fixed" />
@@ -316,19 +318,32 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:text="Payment:"
-                        android:textSize="15sp"
+                        android:text="Price:"
+                        android:textSize="14sp"
                         android:textColor="@color/gray"/>
-                    <RadioGroup
-                        android:id="@+id/paid_radio_group"
-                        android:layout_marginStart="10dp"
+                    <EditText
+                        android:id="@+id/device_price_edit"
+                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@id/device_paid_txt"
+                        android:inputType="numberDecimal"
+                        android:textStyle="bold"
+                        android:textColorHint="@color/dark_gray"
+                        android:hint="(Enter In €)"
+                        android:textSize="14sp"
+                        android:textColor="@color/White"/>
+                    <RadioGroup
+                        android:id="@+id/paid_radio_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/device_price_edit"
                         android:background="@color/transparent"
                         android:checkedButton="@id/radio_paid"
                         android:orientation="horizontal">
                         <RadioButton
+                            android:textSize="11sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/White"
@@ -337,6 +352,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textSize="11sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_not_paid"
                             android:text="Not Paid" />
