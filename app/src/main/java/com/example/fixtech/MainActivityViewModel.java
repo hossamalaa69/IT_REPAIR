@@ -55,15 +55,21 @@ public class MainActivityViewModel extends AndroidViewModel {
         final String id = item.getID();
         String imageUrl = item.getImage_url();
 
-        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
-
-        imageRef.delete().addOnSuccessListener(aVoid -> {
+        if(imageUrl.isEmpty()){
             DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Item.class.getSimpleName()).child(id);
             dbRef.removeValue((error, ref) ->
                     Toast.makeText(MainActivityViewModel.this.getApplication().getApplicationContext()
                             , "deleted successfully", Toast.LENGTH_SHORT).show());
-        }).addOnFailureListener(exception ->
-                Toast.makeText(MainActivityViewModel.this.getApplication().getApplicationContext()
-                        , "Failed deletion", Toast.LENGTH_SHORT).show());
+        }else {
+            StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+            imageRef.delete().addOnSuccessListener(aVoid -> {
+                DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child(Item.class.getSimpleName()).child(id);
+                dbRef.removeValue((error, ref) ->
+                        Toast.makeText(MainActivityViewModel.this.getApplication().getApplicationContext()
+                                , "deleted successfully", Toast.LENGTH_SHORT).show());
+            }).addOnFailureListener(exception ->
+                    Toast.makeText(MainActivityViewModel.this.getApplication().getApplicationContext()
+                            , "Failed deletion", Toast.LENGTH_SHORT).show());
+        }
     }
 }

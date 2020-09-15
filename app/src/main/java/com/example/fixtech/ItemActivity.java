@@ -113,10 +113,12 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
             String status = updated_item.getIssue_status();
             boolean paid = updated_item.isPaid();
 
-            Glide.with(this)
-                    .load(updated_item.getImage_url())
-                    .placeholder(R.drawable.ic_image_placeholder)
-                    .into(item_img);
+            if(!updated_item.getImage_url().isEmpty()) {
+                Glide.with(this)
+                        .load(updated_item.getImage_url())
+                        .placeholder(R.drawable.ic_image_placeholder)
+                        .into(item_img);
+            }
             cust_name_edit.setText(updated_item.getCustomer_name());
             cust_phone_edit.setText(updated_item.getCustomer_phone());
             cust_email_edit.setText(updated_item.getCustomer_email());
@@ -239,7 +241,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     public void saveItem(View view) {
 
         //case new item
-        if(currentUri != null && !cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty() && !device_price_edit.getText().toString().isEmpty()
+        if(!cust_name_edit.getText().toString().isEmpty() && !cust_phone_edit.getText().toString().isEmpty() && !device_price_edit.getText().toString().isEmpty()
                 && !cust_email_edit.getText().toString().isEmpty() && !device_name_edit.getText().toString().isEmpty()
                 && !device_id_edit.getText().toString().isEmpty() && !device_issue_edit.getText().toString().isEmpty()
                 && !device_password_edit.getText().toString().isEmpty() && !delivery_date_txt.getText().toString().isEmpty() && updated_item == null){
@@ -266,8 +268,11 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
             boolean isPaid = isPaidd.equals("Paid");
             Item item = new Item("000" ,cust_name_edit.getText().toString(), cust_phone_edit.getText().toString(), cust_email_edit.getText().toString()
                     ,device_name_edit.getText().toString(), device_id_edit.getText().toString(), device_issue_edit.getText().toString()
-                    ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), currentUri.toString(), isPaid, Float.parseFloat(device_price_edit.getText().toString()));
-            insertIntoDb(item);
+                    ,device_password_edit.getText().toString(), status, book_date.getTime(), delivery_date.getTime(), "", isPaid, Float.parseFloat(device_price_edit.getText().toString()));
+            if(currentUri != null)
+                insertIntoDb(item);
+            else
+                insertWithImageUrl(item);
         }
 
         //update item
@@ -335,8 +340,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void updateWithImage(Item item) {
-        StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(updated_item.getImage_url());
-        imageRef.delete().addOnSuccessListener(aVoid -> {
+        if(updated_item.getImage_url().isEmpty()){
             final StorageReference photoRef = FirebaseStorage.getInstance().getReference().child(Item.class.getSimpleName()).child(currentUri.getLastPathSegment());
             UploadTask uploadTask = photoRef.putFile(currentUri);
             Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
@@ -355,7 +359,29 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
                     Toast.makeText(ItemActivity.this, "Failed update", Toast.LENGTH_SHORT).show();
                 }
             });
-        });
+        }else {
+            StorageReference imageRef = FirebaseStorage.getInstance().getReferenceFromUrl(updated_item.getImage_url());
+            imageRef.delete().addOnSuccessListener(aVoid -> {
+                final StorageReference photoRef = FirebaseStorage.getInstance().getReference().child(Item.class.getSimpleName()).child(currentUri.getLastPathSegment());
+                UploadTask uploadTask = photoRef.putFile(currentUri);
+                Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return photoRef.getDownloadUrl();
+                }).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        String imageUrl = downloadUri.toString();
+                        item.setImage_url(imageUrl);
+                        updateWithoutImage(item);
+                    } else {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ItemActivity.this, "Failed update", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            });
+        }
     }
 
     private void updateWithoutImage(Item item) {
@@ -404,6 +430,7 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
         itemDbReference.child(id).setValue(item).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                Toast.makeText(ItemActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 checkPrinting(item);
             }
