@@ -32,8 +32,8 @@
 
                 <ImageView
                     android:id="@+id/item_image"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_image_placeholder"
                     android:layout_centerVertical="true" />
@@ -46,7 +46,7 @@
                     android:layout_marginStart="15dp"
                     android:text="Device Name"
                     android:textColor="@color/White"
-                    android:textSize="15sp"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     android:layout_centerVertical="true"
                     />
@@ -58,15 +58,15 @@
                     android:text="✘"
                     android:textColor="@color/White"
                     android:layout_centerVertical="true"
-                    android:textSize="12sp"
+                    android:textSize="20sp"
                     android:layout_marginEnd="12dp"
                     android:background="@drawable/circle_text"
                     android:gravity="center"/>
 
                 <ImageView
                     android:id="@+id/drop_button"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_expand"
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Customer Name:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -116,7 +116,7 @@
                             android:text="Hossam Alaa"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
 
@@ -128,8 +128,8 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:id="@+id/image_email"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_centerVertical="true"
                             android:src="@drawable/ic_email_purple"
                             />
@@ -142,7 +142,7 @@
                             android:text="Email@address.com"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="20dp"/>
                     </RelativeLayout>
 
@@ -154,8 +154,8 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:id="@+id/image_phone"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_centerVertical="true"
                             android:src="@drawable/ic_phone_purple"
                             />
@@ -168,7 +168,7 @@
                             android:text="01146513563"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="20dp"/>
                     </RelativeLayout>
                     <RelativeLayout
@@ -183,9 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Price:"
-                            android:textSize="15sp"
-                            android:layout_centerVertical="true"
-                            />
+                            android:textSize="20sp" />
                         <TextView
                             android:id="@+id/price_txt"
                             android:layout_centerVertical="true"
@@ -195,7 +193,7 @@
                             android:text="10£"
                             android:textColor="@color/dark"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                         <TextView
                             android:id="@+id/payment_txt"
@@ -206,7 +204,7 @@
                             android:text="Paid"
                             android:textColor="@color/dark"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="10dp"/>
                     </RelativeLayout>
 
@@ -221,7 +219,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Device ID:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -233,7 +231,7 @@
                             android:text="3319626497666"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
 
@@ -248,7 +246,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Device Issue:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -260,7 +258,7 @@
                             android:text="Broken Screen"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
 
@@ -275,7 +273,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Device Password:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -287,7 +285,7 @@
                             android:textStyle="bold"
                             android:text="12345678"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
 
@@ -302,7 +300,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Booking Date:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -314,7 +312,7 @@
                             android:text="Tue, 15 Aug 2020, 17:30:45"
                             android:textStyle="bold"
                             android:textColor="@color/dark"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
 
@@ -329,7 +327,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Delivery Date:"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_centerVertical="true"
                             />
                         <TextView
@@ -341,13 +339,13 @@
                             android:text="Thu, 17 Aug 2020, 13:02:30"
                             android:textColor="@color/dark"
                             android:textStyle="bold"
-                            android:textSize="15sp"
+                            android:textSize="20sp"
                             android:layout_marginStart="5dp"/>
                     </RelativeLayout>
                     <ImageView
                         android:id="@+id/share_img"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_below="@id/deliver_part"
                         android:src="@drawable/ic_open_pdf"
                         android:layout_marginEnd="10dp"

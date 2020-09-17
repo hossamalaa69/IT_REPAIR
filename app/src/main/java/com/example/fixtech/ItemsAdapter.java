@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,6 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.BuildConfig;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,149 +52,11 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
     }
 
     private void printPDF(Item item) {
-
-        PdfDocument myPdfDocument = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(62,85,1).create();
-        PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
-
-        int x = 4, y = 7;
-        Paint myPaint = new Paint();
-
-        //Admin Name
-        myPaint.setTextSize(9.0f);
-        myPaint.setTextScaleX(0.5f);
-
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        myPaint.setTextAlign(Paint.Align.CENTER);
-        myPaint.setColor(Color.RED);
-        String myString = "IT  REPAIR";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=5;
-
-        //Address Part
-        myPaint.setTextSize(5f);
-        myPaint.setTextScaleX(0.5f);
-        myPaint.setColor(Color.GRAY);
-        myPaint.setTextAlign(Paint.Align.CENTER);
-        myString = "61 HIGH STREET, PAISLEY, PA1 2AS";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=5;
-
-        //Phone part
-        myString = "01413282049";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=7;
-
-
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-
-        int spacing = 7;
-        //Device Name
-        myPaint.setTextSize(6.0f);
-        myPaint.setTextAlign(Paint.Align.LEFT);
-        myPaint.setColor(Color.BLACK);
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        myString = "Device:  " + item.getDevice_name();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Payment
-        myString = item.getIssue_status() + ",  ";
-        myString += item.getPrice() + "£  ";
-        if(item.isPaid())
-            myString += "Paid";
-        else
-            myString += "Not Paid";
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-
-        //Customer Name
-        myString = "Customer:  " + item.getCustomer_name();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Customer Phone
-        myString = "Phone:  " + item.getCustomer_phone();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device ID
-        myString = "ID:  " + item.getDevice_ID();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device Issue
-        myString = "Issue:  " + item.getDevice_issue();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-
-        //Device Password
-        myString = "Password:  " + item.getDevice_password();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
-        //Device booking date
-        myString = "Booking:  " + sdf.format(new Date(item.getBook_date())).toString();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device booking date
-        myString = "Delivery:  " + sdf.format(new Date(item.getDelivery_date())).toString();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-
-        myPdfDocument.finishPage(myPage);
-
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + item.getDevice_ID() + ".pdf";
-        File myFile = new File(myFilePath);
-        try {
-            myPdfDocument.writeTo(new FileOutputStream(myFile));
-            Toast.makeText(context, "PDF is created successfully", Toast.LENGTH_SHORT).show();
-            openPDF(myFile);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(context, "Error Printing PDF", Toast.LENGTH_SHORT).show();
-        }
-        myPdfDocument.close();
-    }
-
-    private void shareBluetooth(File myFile) {
-        // generate URI, I defined authority as the application ID in the Manifest, the last param is file I want to open
-        Uri uri = FileProvider.getUriForFile(context, "com.example.fixtech", myFile);
-
-        try {
-            Intent sendIntent = new Intent();
-            sendIntent.setType("file/*");
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_STREAM,
-                    uri);
-            // startActivity(Intent.createChooser(sendIntent));
-            context.startActivity(Intent.createChooser(sendIntent,
-                    "Share file via:"));
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(context, "Failed sending bluetooth", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void openPDF(File file){
-
-        Uri pdf = FileProvider.getUriForFile(context, "com.example.fixtech", file);
-
-        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        pdfIntent.setDataAndType(pdf, "application/pdf");
-
-        try {
-            context.startActivity(pdfIntent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(context, "Error opening file", Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(context, ItemPrintActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item_serialized",item);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 
     @Override
@@ -202,13 +64,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
 
         Item item = itemList.get(position);
 
-        String isPaid = "Paid";
-        if(!item.isPaid())
-            isPaid = "Not Paid";
-
         GradientDrawable priorityCircle = (GradientDrawable) holder.status_txt.getBackground();
         // Get the appropriate background color based on the priority
-        int priorityColor = getIssueColor(item.getIssue_status());
+        int priorityColor = getPaymentColor(item.isPaid());
         priorityCircle.setColor(priorityColor);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
@@ -217,14 +75,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
         holder.customer_name_txt.setText(item.getCustomer_name());
         holder.user_email.setText(item.getCustomer_email());
         holder.user_phone.setText(item.getCustomer_phone());
-        holder.payment_txt.setText(isPaid);
+        holder.payment_txt.setText(item.getIssue_status());
         holder.device_id_txt2.setText(item.getDevice_ID());
         holder.device_issue_txt2.setText(item.getDevice_issue());
         holder.device_password_txt2.setText(item.getDevice_password());
         holder.booking_txt.setText(simpleDateFormat.format(new Date(item.getBook_date())).toString());
         holder.deliver_txt.setText(simpleDateFormat.format(new Date(item.getDelivery_date())).toString());
         holder.price_txt.setText("" + item.getPrice() + "£ ,");
-        if(item.getIssue_status().equals("Fixed"))
+
+        if(item.isPaid())
             holder.status_txt.setText("✓");
         else
             holder.status_txt.setText("✘");
@@ -262,18 +121,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemsVH> {
         return itemList.size();
     }
 
-    private int getIssueColor(String status) {
+    private int getPaymentColor(boolean isPaid) {
         int priorityColor = 0;
-        switch (status) {
-            case "Fixed":
-                priorityColor = ContextCompat.getColor(context, R.color.colorGreen);
-                break;
-            case "Not Fixed":
-                priorityColor = ContextCompat.getColor(context, R.color.colorRed);
-                break;
-            default:
-                break;
-        }
+        if(isPaid)
+            priorityColor = ContextCompat.getColor(context, R.color.colorGreen);
+        else
+            priorityColor = ContextCompat.getColor(context, R.color.colorRed);
+
         return priorityColor;
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="edit_text_size">25sp</dimen>
+    <dimen name="images_sizes">45dp</dimen>
+    <dimen name="rv_txt">20sp</dimen>
+    <dimen name="rv_images">50dp</dimen>
+
+    <dimen name="device_name">25sp</dimen>
+    <dimen name="device_image">75dp</dimen>
+    <dimen name="status_logo">30dp</dimen>
+    <dimen name="drop_image">35dp</dimen>
+
+
+</resources>

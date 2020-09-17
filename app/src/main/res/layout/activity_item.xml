@@ -26,8 +26,8 @@
                 android:layout_height="200dp">
                 <ImageView
                     android:id="@+id/item_img"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
                     android:scaleType="fitXY"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/ic_image_placeholder"
@@ -76,7 +76,7 @@
                     android:layout_centerVertical="true"
                     android:text="Customer Name:"
                     android:layout_marginEnd="5dp"
-                    android:textSize="15sp"
+                    android:textSize="25sp"
                     android:textColor="@color/gray"/>
                 <EditText
                     android:id="@+id/cust_name_edit"
@@ -88,7 +88,7 @@
                     android:hint="(Enter Customer Name)"
                     android:inputType="textPersonName"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="25sp"
                     android:textColor="@color/White"/>
                 </RelativeLayout>
 
@@ -101,8 +101,8 @@
                     <ImageView
                         android:id="@+id/cust_phone_img"
                         android:layout_centerVertical="true"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_phone_white"/>
                     <EditText
@@ -115,7 +115,7 @@
                         android:textStyle="bold"
                         android:textColorHint="@color/dark_gray"
                         android:hint="(Enter Phone)"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
 
@@ -129,8 +129,8 @@
                     <ImageView
                         android:id="@+id/cust_email_img"
                         android:layout_centerVertical="true"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_marginEnd="5dp"
                         android:src="@drawable/ic_email_white"/>
 
@@ -144,7 +144,7 @@
                         android:textStyle="bold"
                         android:textColorHint="@color/dark_gray"
                         android:hint="(Enter Email)"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
 
@@ -161,7 +161,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:text="Device Name:"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/gray"/>
                     <EditText
@@ -174,7 +174,7 @@
                         android:maxLines="1"
                         android:textStyle="bold"
                         android:hint="(Enter Device Name)"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
 
@@ -192,7 +192,7 @@
                         android:layout_centerVertical="true"
                         android:text="Device ID:"
                         android:layout_marginEnd="5dp"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/gray"/>
                     <EditText
                         android:id="@+id/device_id_edit"
@@ -204,7 +204,7 @@
                         android:textColorHint="@color/dark_gray"
                         android:hint="(Enter Device ID)"
                         android:layout_toEndOf="@id/device_id_txt"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
 
@@ -222,7 +222,7 @@
                         android:layout_centerVertical="true"
                         android:text="Device Issue:"
                         android:layout_marginEnd="5dp"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/gray"/>
                     <EditText
                         android:id="@+id/device_issue_edit"
@@ -234,7 +234,7 @@
                         android:maxLines="1"
                         android:hint="(Enter Device Issue)"
                         android:layout_toEndOf="@id/device_issue_txt"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
                 <RelativeLayout
@@ -251,7 +251,7 @@
                         android:layout_centerVertical="true"
                         android:text="Device Password:"
                         android:layout_marginEnd="5dp"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/gray"/>
                     <EditText
                         android:id="@+id/device_password_edit"
@@ -263,7 +263,7 @@
                         android:textStyle="bold"
                         android:maxLines="1"
                         android:hint="(Enter Device Password)"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                 </RelativeLayout>
                 <RelativeLayout
@@ -279,7 +279,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:text="Issue Status:"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="@color/gray"/>
                     <RadioGroup
                         android:id="@+id/myRadioGroup"
@@ -293,14 +293,14 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="20sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_fixed"
                             android:text="Fixed" />
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
+                            android:textSize="20sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_not_fixed"
                             android:text="Not Fixed" />
@@ -319,7 +319,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:text="Price:"
-                        android:textSize="14sp"
+                        android:textSize="25sp"
                         android:textColor="@color/gray"/>
                     <EditText
                         android:id="@+id/device_price_edit"
@@ -331,7 +331,7 @@
                         android:textStyle="bold"
                         android:textColorHint="@color/dark_gray"
                         android:hint="(Enter In €)"
-                        android:textSize="14sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
                     <RadioGroup
                         android:id="@+id/paid_radio_group"
@@ -343,7 +343,7 @@
                         android:checkedButton="@id/radio_paid"
                         android:orientation="horizontal">
                         <RadioButton
-                            android:textSize="11sp"
+                            android:textSize="20sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/White"
@@ -352,7 +352,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="11sp"
+                            android:textSize="20sp"
                             android:textColor="@color/White"
                             android:id="@+id/radio_not_paid"
                             android:text="Not Paid" />
@@ -372,7 +372,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:text="Booking Date:"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/gray"/>
 
@@ -383,7 +383,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@id/book_date_hint"
                         android:textColor="@color/White"
-                        android:textSize="12sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
                 <RelativeLayout
@@ -394,8 +394,8 @@
                     android:layout_marginBottom="3dp">
                     <ImageView
                         android:id="@+id/img_pick_date"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentStart="true"
                         android:src="@drawable/ic_date_white"
@@ -407,7 +407,7 @@
                         android:layout_toEndOf="@id/img_pick_date"
                         android:layout_centerVertical="true"
                         android:text="Delivery Date:"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
                         android:textColor="@color/gray"/>
@@ -418,7 +418,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:layout_toEndOf="@id/delivery_date_hint"
-                        android:textSize="12sp"
+                        android:textSize="25sp"
                         android:textColor="@color/White"/>
 
                 </RelativeLayout>

@@ -9,22 +9,13 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -43,7 +33,6 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.BuildConfig;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,7 +40,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -495,151 +483,11 @@ public class ItemActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void printPDF(Item item) {
-
-        PdfDocument myPdfDocument = new PdfDocument();
-        PdfDocument.PageInfo myPageInfo = new PdfDocument.PageInfo.Builder(62,85,1).create();
-        PdfDocument.Page myPage = myPdfDocument.startPage(myPageInfo);
-
-        int x = 4, y = 7;
-        Paint myPaint = new Paint();
-
-        //Admin Name
-        myPaint.setTextSize(9.0f);
-        myPaint.setTextScaleX(0.5f);
-
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        myPaint.setTextAlign(Paint.Align.CENTER);
-        myPaint.setColor(Color.RED);
-        String myString = "IT  REPAIR";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=5;
-
-        //Address Part
-        myPaint.setTextSize(5f);
-        myPaint.setTextScaleX(0.5f);
-        myPaint.setColor(Color.GRAY);
-        myPaint.setTextAlign(Paint.Align.CENTER);
-        myString = "61 HIGH STREET, PAISLEY, PA1 2AS";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=5;
-
-        //Phone part
-        myString = "01413282049";
-        myPage.getCanvas().drawText(myString, myPageInfo.getPageWidth()/2, y, myPaint);
-        y+=7;
-
-
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-
-        int spacing = 7;
-        //Device Name
-        myPaint.setTextSize(6.0f);
-        myPaint.setTextAlign(Paint.Align.LEFT);
-        myPaint.setColor(Color.BLACK);
-        myPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        myString = "Device:  " + item.getDevice_name();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Payment
-        myString = item.getIssue_status() + ",  ";
-        myString += item.getPrice() + "£  ";
-        if(item.isPaid())
-            myString += "Paid";
-        else
-            myString += "Not Paid";
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-
-        //Customer Name
-        myString = "Customer:  " + item.getCustomer_name();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Customer Phone
-        myString = "Phone:  " + item.getCustomer_phone();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device ID
-        myString = "ID:  " + item.getDevice_ID();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device Issue
-        myString = "Issue:  " + item.getDevice_issue();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-
-        //Device Password
-        myString = "Password:  " + item.getDevice_password();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm");
-        //Device booking date
-        myString = "Booking:  " + sdf.format(new Date(item.getBook_date())).toString();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-        y+=spacing;
-
-        //Device booking date
-        myString = "Delivery:  " + sdf.format(new Date(item.getDelivery_date())).toString();
-        myPage.getCanvas().drawText(myString, x, y, myPaint);
-
-        myPdfDocument.finishPage(myPage);
-
-        String myFilePath = Environment.getExternalStorageDirectory().getPath() + "/" + item.getDevice_ID() + ".pdf";
-        File myFile = new File(myFilePath);
-        try {
-            myPdfDocument.writeTo(new FileOutputStream(myFile));
-            Toast.makeText(ItemActivity.this, "PDF is created successfully", Toast.LENGTH_SHORT).show();
-            openPDF(myFile);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(ItemActivity.this, "Error Printing PDF", Toast.LENGTH_SHORT).show();
-        }
-        myPdfDocument.close();
+        Intent intent = new Intent(ItemActivity.this, ItemPrintActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item_serialized",item);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
-
-    private void shareBluetooth(File myFile) {
-        // generate URI, I defined authority as the application ID in the Manifest, the last param is file I want to open
-        Uri uri = FileProvider.getUriForFile(ItemActivity.this, "com.example.fixtech", myFile);
-
-        try {
-            Intent sendIntent = new Intent();
-            sendIntent.setType("file/*");
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_STREAM,
-                    uri);
-            // startActivity(Intent.createChooser(sendIntent));
-            startActivity(Intent.createChooser(sendIntent,
-                    "Share file via:"));
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(ItemActivity.this, "Failed sending bluetooth", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-    private void openPDF(File file){
-
-        Uri pdf = FileProvider.getUriForFile(ItemActivity.this, "com.example.fixtech", file);
-
-        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        pdfIntent.setDataAndType(pdf, "application/pdf");
-
-        try {
-            startActivity(pdfIntent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(ItemActivity.this, "Error opening file", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
 
 }

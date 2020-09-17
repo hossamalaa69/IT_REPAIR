@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/White"
+    tools:context=".ItemPrintActivity">
+
+    <RelativeLayout
+        android:id="@+id/main_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/White"
+        android:layout_marginStart="5dp">
+
+        <TextView
+            android:id="@+id/store_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IT REPAIR"
+            android:textSize="20sp"
+            android:textColor="#1265EE"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/store_address"
+            android:layout_below="@id/store_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="61 HIGH STREET, PAISLEY, PA1 2AS"
+            android:textSize="12sp"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/store_number"
+            android:layout_below="@id/store_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01413282049"
+            android:textSize="12sp"
+            android:textColor="@color/dark_gray"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/deivce_name_print"
+            android:layout_below="@id/store_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Name: Lenovo"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/deivce_status_print"
+            android:layout_below="@id/deivce_name_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fixed, 10£ , Paid"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/cust_name_print"
+            android:layout_below="@id/deivce_status_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Name: Michael Scott"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/cust_phone_print"
+            android:layout_below="@id/cust_name_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Phone: +2343356132"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/device_id_print"
+            android:layout_below="@id/cust_phone_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device ID: xgr65egej3"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/device_issue_print"
+            android:layout_below="@id/device_id_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Issue: Broken Screen"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/device_password_print"
+            android:layout_below="@id/device_issue_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Password: 12345678"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/device_book_date_print"
+            android:layout_below="@id/device_password_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Date: 12/08/2020"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/device_deliver_date_print"
+            android:layout_below="@id/device_book_date_print"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivery Date: 25/09/2020"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_save_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/main_relative"
+        android:backgroundTint="@color/pink2"
+        android:src="@drawable/ic_print"
+        app:borderWidth="0dp"
+        android:onClick="createPdf"
+        android:layout_margin="20dp"/>
+
+</RelativeLayout>
